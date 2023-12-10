@@ -10,9 +10,9 @@ class akun_bank:
         hashed_password = hashlib.sha256(password.encode()).hexdigest()
         return hashed_password
 
-    def check_password(self, input_password):
+    def check_password(self, input_password, input_username):
         # Memeriksa apakah kata sandi yang dimasukkan cocok dengan yang disimpan
-        return self.password == self._hash_password(input_password)
+        return self.username == input_username and self.password == self._hash_password(input_password)
 
 def read_data_rahasia_from_file(data_rahasia):
     try:
@@ -43,9 +43,10 @@ def main():
 
         # Menggunakan akun
         for n in range(3):
-            login_attempt = str(input("Masukkan kata sandi untuk masuk: "))
+            login_attempt = str(input("Masukkan username untuk masuk: "))
+            login_attempt1 = str(input("Masukkan kata sandi untuk masuk: "))
 
-            if user_account.check_password(login_attempt):
+            if user_account.username == login_attempt and user_account.check_password (login_attempt1,login_attempt):
                 print("Masuk berhasil.")
                 break
             else:
