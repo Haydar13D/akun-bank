@@ -1,7 +1,7 @@
 import hashlib
 
 class akun_bank:
-    def __init__(self, username, password):
+    def akun(self, username, password):
         self.username = username
         self.password = self._hash_password(password)
 
