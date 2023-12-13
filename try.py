@@ -1,7 +1,7 @@
 import hashlib
 
 class akun_bank:
-    def akun(self, username, password):
+    def __init__(self, username, password):
         self.username = username
         self.password = self._hash_password(password)
 
@@ -9,6 +9,16 @@ class akun_bank:
         # Menggunakan hashlib untuk membuat hash SHA-256 dari kata sandi
         hashed_password = hashlib.sha256(password.encode()).hexdigest()
         return hashed_password
+    def _encrypt_password(self, password):
+        # Fungsi ini dapat digunakan untuk menghasilkan kode enkripsi dari password
+        # Sesuaikan dengan algoritma enkripsi yang Anda inginkan
+        encrypted_password = hashlib.sha256(password.encode()).hexdigest()
+        return encrypted_password
+
+    def get_encrypted_password(self):
+        # Mengembalikan kode enkripsi dari password yang sudah dipanggil
+        return self._encrypt_password(self.password)
+
 
     def check_password(self, input_password, input_username):
         # Memeriksa apakah kata sandi yang dimasukkan cocok dengan yang disimpan
@@ -30,7 +40,7 @@ def read_data_rahasia_from_file(data_rahasia):
         print(f"File {data_rahasia} not found.")
         return None, None
 
-# Contoh penggunaan program
+
 def main():
     # Mengambil data dari berkas
     filename = 'data_rahasia.txt'
@@ -40,6 +50,9 @@ def main():
         # Membuat akun
         user_account = akun_bank(username, password)
         print("Akun berhasil dibuat.")
+        encrypted_password = user_account.get_encrypted_password()
+        
+        print(f"Kode enkripsi dari password: {encrypted_password}")
 
         # Menggunakan akun
         for n in range(3):
