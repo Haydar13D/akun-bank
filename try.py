@@ -13,7 +13,8 @@ class AkunBank:
         return hashed_password
 
     def _encrypt_password(self, password):
-        
+        # Fungsi untuk menghasilkan enkripsi password
+        # menggunakan SHA-256
         encrypted_password = hashlib.sha256(password.encode()).hexdigest()
         return encrypted_password
 
